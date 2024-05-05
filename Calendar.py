@@ -100,4 +100,14 @@ class CalendarApp:
         for widget in self.calendar_tab.winfo_children():
             widget.destroy()
         self.cal = calendar.monthcalendar(self.year, self.month)
-        self.create_calendar_widgets()          
+        self.create_calendar_widgets()    
+        
+#Создаем основное окно приложения с определенным размером
+root = tk.Tk()
+root.title("Календарь")
+root.geometry("400x300")
+
+#Создаем экземпляр приложения
+app = CalendarApp(root)
+
+root.mainloop()      
