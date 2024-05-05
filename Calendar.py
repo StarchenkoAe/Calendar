@@ -70,3 +70,14 @@ class CalendarApp:
                         bg_color = "white"
                     
                     tk.Label(row, width=4, text=day, bg=bg_color).pack(side=tk.LEFT)
+      
+    def create_info_widgets(self):
+        #Информация о календаре
+        info_text = "Этот  календарь  отображает  текущий месяц \n"
+        info_text +="c выделением  праздничных  дней красным  и \n"
+        info_text += "сегодняшнего   дня   синим.  Вы     можете \n"
+        info_text += "переключаться  между  месяцами,  используя кнопки <<< или >>>."
+        self.info_text = tk.Text(self.info_tab, width=50, height=10, wrap="word")
+        self.info_text.insert(tk.END, info_text)
+        self.info_text.config(state="disabled")
+        self.info_text.pack(padx=20, pady=20, fill=tk.BOTH, expand=True)              
