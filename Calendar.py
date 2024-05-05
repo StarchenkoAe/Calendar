@@ -37,3 +37,36 @@ class CalendarApp:
         #Отображения  дней недели
         days_of_week_label = tk.Label(self.calendar_tab, text="П         В         С         Ч         П         С         В", font=("Bahnschrift Light Condensed", 12))
         days_of_week_label.pack()
+
+        #Кнопки для переключения между месяцами
+        self.prev_button = tk.Button(self.calendar_tab, text="<<<", command=self.prev_month)
+        self.prev_button.pack(side=tk.LEFT, padx=10, pady=5)
+        self.next_button = tk.Button(self.calendar_tab, text=">>>", command=self.next_month)
+        self.next_button.pack(side=tk.RIGHT, padx=10, pady=5)
+
+        #Создаем таблицу с днями месяца
+        for week in self.cal:
+            row = tk.Frame(self.calendar_tab)
+            row.pack(side=tk.TOP, padx=10, pady=5)
+            for day in week:
+                if day == 0:
+                    tk.Label(row, width=4, text=" ").pack(side=tk.LEFT)
+                else:
+                    #Получаем день недели для текущей даты
+                    weekday = datetime(self.year, self.month, day).weekday()
+                    #Выделение праздничных дней или сегодняшнего дня
+                    if (self.month == 1 and day in [1, 2, 3, 4, 5, 6, 7, 8]) or \
+                       (self.month == 2 and day == 23) or \
+                       (self.month == 3 and day == 8) or \
+                       (self.month == 5 and day == 1) or \
+                       (self.month == 5 and day == 9) or \
+                       (self.month == 6 and day == 12) or \
+                       (self.month == 11 and day == 4) or \
+                       (self.month == 1 and day == 7):
+                        bg_color = "red"  # Выделение праздничных дней красным
+                    elif (self.month == date.today().month) and (day == self.day) and (self.year == date.today().year):
+                        bg_color = "blue"  # Выделение сегодняшнего дня синим 
+                    else:
+                        bg_color = "white"
+                    
+                    tk.Label(row, width=4, text=day, bg=bg_color).pack(side=tk.LEFT)
